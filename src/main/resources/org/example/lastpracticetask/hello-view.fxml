@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.lastpracticetask.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Label text="Система управления фитнес-клубом" style="-fx-font-size: 24px;"/>
+
+    <TabPane VBox.vgrow="ALWAYS">
+        <Tab text="Расписание" closable="false">
+            <VBox spacing="10">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Тренер:" />
+                    <ComboBox fx:id="trainerComboBox" />
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Клиент:" />
+                    <ComboBox fx:id="clientComboBox" />
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Услуга:" />
+                    <ComboBox fx:id="serviceComboBox" />
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Дата:" />
+                    <DatePicker fx:id="datePicker" />
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Время:" />
+                    <ComboBox fx:id="timeComboBox" />
+                </HBox>
+                <Button text="Записать на тренировку" onAction="#onScheduleTraining" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+                
+                <TableView fx:id="scheduleTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn text="Тренер" fx:id="trainerColumn" prefWidth="150"/>
+                        <TableColumn text="Клиент" fx:id="clientColumn" prefWidth="150"/>
+                        <TableColumn text="Дата" fx:id="dateColumn" prefWidth="100"/>
+                        <TableColumn text="Время" fx:id="timeColumn" prefWidth="100"/>
+                        <TableColumn text="Услуга" fx:id="serviceColumn" prefWidth="150"/>
+                        <TableColumn text="Статус" fx:id="statusColumn" prefWidth="100"/>
+                    </columns>
+                </TableView>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Button text="Завершить тренировку" onAction="#onCompleteTraining" />
+                    <Button text="Отменить тренировку" onAction="#onCancelTraining" />
+                    <Button text="Удалить тренировку" onAction="#onDeleteScheduleItem" />
+                </HBox>
+            </VBox>
+        </Tab>
+
+        <Tab text="Управление" closable="false">
+            <VBox spacing="10">
+                <HBox spacing="10" HBox.hgrow="ALWAYS">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Тренеры"/>
+                        <TableView fx:id="trainersTable" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn text="Имя" fx:id="trainerNameColumn" prefWidth="150"/>
+                                <TableColumn text="Специализация" fx:id="trainerSpecColumn" prefWidth="150"/>
+                                <TableColumn text="Телефон" fx:id="trainerPhoneColumn" prefWidth="120"/>
+                                <TableColumn text="Email" fx:id="trainerEmailColumn" prefWidth="200"/>
+                            </columns>
+                        </TableView>
+                        <HBox spacing="5">
+                            <Button text="Добавить" onAction="#onAddTrainer"/>
+                            <Button text="Удалить" onAction="#onDeleteTrainer"/>
+                        </HBox>
+                    </VBox>
+
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Клиенты"/>
+                        <TableView fx:id="clientsTable" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn text="Имя" fx:id="clientNameColumn" prefWidth="150"/>
+                                <TableColumn text="Телефон" fx:id="clientPhoneColumn" prefWidth="120"/>
+                                <TableColumn text="Email" fx:id="clientEmailColumn" prefWidth="200"/>
+                            </columns>
+                        </TableView>
+                        <HBox spacing="5">
+                            <Button text="Добавить" onAction="#onAddClient"/>
+                            <Button text="Удалить" onAction="#onDeleteClient"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
+
+                <VBox spacing="5">
+                    <Label text="Услуги"/>
+                    <TableView fx:id="servicesTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn text="Название" fx:id="serviceNameColumn" prefWidth="200"/>
+                            <TableColumn text="Описание" fx:id="serviceDescColumn" prefWidth="300"/>
+                            <TableColumn text="Цена" fx:id="servicePriceColumn" prefWidth="100"/>
+                            <TableColumn text="Тип" fx:id="serviceTypeColumn" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                    <HBox spacing="5">
+                        <Button text="Добавить" onAction="#onAddService"/>
+                        <Button text="Удалить" onAction="#onDeleteService"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </Tab>
+
+        <Tab text="Абонементы" closable="false">
+            <content>
+                <VBox spacing="10">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Клиент:" />
+                        <ComboBox fx:id="subscriptionClientComboBox" />
+                        <Label text="Услуга:" />
+                        <ComboBox fx:id="subscriptionServiceComboBox" />
+                        <Label text="Дата начала:" />
+                        <DatePicker fx:id="subscriptionStartDatePicker" />
+                        <Button text="Добавить абонемент" onAction="#onAddSubscription" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+                    </HBox>
+                    <TableView fx:id="subscriptionsTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="subscriptionClientColumn" text="Клиент" prefWidth="150"/>
+                            <TableColumn fx:id="subscriptionServiceColumn" text="Услуга" prefWidth="150"/>
+                            <TableColumn fx:id="subscriptionStartColumn" text="Дата начала" prefWidth="100"/>
+                            <TableColumn fx:id="subscriptionEndColumn" text="Дата окончания" prefWidth="100"/>
+                            <TableColumn fx:id="subscriptionStatusColumn" text="Статус" prefWidth="100"/>
+                            <TableColumn fx:id="subscriptionReasonColumn" text="Причина завершения" prefWidth="200"/>
+                        </columns>
+                    </TableView>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button text="Завершить абонемент" onAction="#onTerminateSubscription"/>
+                    </HBox>
+                </VBox>
+            </content>
+        </Tab>
+    </TabPane>
+</VBox>
